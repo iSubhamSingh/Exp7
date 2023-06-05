@@ -1,20 +1,23 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="header-title" style="color: white;">User Directory</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list *ngIf="users.length > 0">
+    <ion-item *ngFor="let user of users" class="user-item">
+      <ion-avatar slot="start">
+        <img src="{{ user.avatar }}" class="user-avatar">
+      </ion-avatar>
+      <ion-label>
+        <h2 class="user-name">{{ user.first_name }} {{ user.last_name }}</h2>
+        <p class="user-email">{{ user.email }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-button expand="block" class="add-button" (click)="addUser()">Add User</ion-button>
+
+  <ion-button expand="block" class="get-data-button" (click)="getUsers()" *ngIf="users.length === 0">Get Data</ion-button>
 </ion-content>
